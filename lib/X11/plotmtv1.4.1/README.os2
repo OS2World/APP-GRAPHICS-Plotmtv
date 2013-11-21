@@ -1,0 +1,44 @@
+OS/2 binaries for PlotMTV 1.4.1 + patch
+
+08may1999
+
+The old version was broken in that it required 
+silently a patched version of emxlibcm.dll
+with erf() added. If one did use the original dll
+plotmtv died when trying to open an X window
+with a popup log entry pointing to a missing 
+function 981 (SYS2070). So I recompiled the
+patch (under emx09d) and linked erf() statically.
+This is kind of a hack, I only threw s_erf.c
+an math_private.h (by M.Holzapfel) into the lib 
+dir and added s_erf.c to the SOURCES.
+
+
+
+03june1998
+
+This is a binary package of PlotMTV which I did 
+because the PlotMTV 1.3.1 port cannot read OS/2
+line breaks (CR/LF). I patched only the fopen
+mode from "r" to "rt" and changed the handling of
+compressed files a bit. You can use compressed 
+input files the following way:
+
+*.zip: plotmtv calls unzip(*) and pipes its output
+       into itself
+
+*.gz,
+*.z  : plotmtv calls gzip(*) in uncompression
+       mode and pipes its output into itself
+
+*.Z  : plotmtv calls compress(*) in uncompression
+       mode and pipes its output into itself
+
+(*) these programs have to be in your PATH
+
+I know that the handling of *.z/*.Z is a bit
+questionable, tell me if you want to have it
+another way.
+
+Thomas Hoffmann
+thoffman@zappa.sax.de
